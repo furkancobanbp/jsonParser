@@ -98,5 +98,17 @@ namespace jsonParser
                 contex.SaveChanges();
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            using (var contex = new context())
+            {
+                foreach (clsAuf i in api.getAuf(dateTimePicker1.Value, dateTimePicker2.Value))
+                {
+                    contex.tblAuf.Add(i);
+                }
+                contex.SaveChanges();
+            }
+        }
     }
 }

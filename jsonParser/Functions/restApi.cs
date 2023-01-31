@@ -70,5 +70,19 @@ namespace jsonParser.Functions
             var jsonModel = JsonConvert.DeserializeObject<List<clsGercekZamanliUretim>>(body);
            return jsonModel;
         }
+        public List<clsAuf> getAuf(DateTime basTar, DateTime bitTar)
+        {
+            var client = new RestClient(Url);
+
+            var request = new RestRequest("/market/auf", Method.Get);
+            request.AddParameter("startDate", basTar.ToString("yyyy-MM-dd"));
+            request.AddParameter("endDate", bitTar.ToString("yyyy-MM-dd"));
+
+            var response = client.Execute(request).Content;
+            JObject jobj = JObject.Parse(response);
+            var body = jobj["body"]["aufList"].ToString();
+            var jsonModel = JsonConvert.DeserializeObject<List<clsAuf>>(body);
+            return jsonModel;
+        }
     }
 }
