@@ -1,0 +1,24 @@
+﻿using jsonParser.Model;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace jsonParser
+{
+    public class context : DbContext
+    {
+        public DbSet<clsOsosModel> tblOsosVeri { get; set; } 
+        public DbSet<clsDagitimModel> tblDagitimBolgeleri { get; set; }
+        public DbSet<clsPiyasaFiyatlariModel> tblPiyasaFiyatlari { get; set; }
+        public DbSet<clsDgpTalimatOzet> tblDgpOzet { get; set; }
+        public DbSet<clsGercekZamanliUretim> tblGercekZamanliUretimler { get; set; }
+
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseNpgsql("Host=localhost;Database=CeliklerDb;Username=postgres;Password=Fc123456*");
+    }
+}
