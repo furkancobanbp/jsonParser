@@ -110,5 +110,30 @@ namespace jsonParser
                 contex.SaveChanges();
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (var contex = new context())
+            {
+                foreach (clsGrf i in api.getGrf(dateTimePicker1.Value, dateTimePicker2.Value))
+                {
+                    if (i.VeriTipi == "DAILY")
+                    {
+                        i.VeriTipi = "Günlük";
+                    }
+                    else if (i.VeriTipi == "MONTHLY")
+                    {
+                        i.VeriTipi = "AYLIK";
+                    }
+                    else
+                    {
+                        i.VeriTipi = "Periyodik";
+                    }
+                    contex.tblGazReferans.Add(i);
+                }
+                contex.SaveChanges();
+            }
+           
+        }
     }
 }

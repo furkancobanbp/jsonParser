@@ -17,6 +17,7 @@ namespace jsonParser
         public DbSet<clsDgpTalimatOzet> tblDgpOzet { get; set; }
         public DbSet<clsGercekZamanliUretim> tblGercekZamanliUretimler { get; set; }
         public DbSet<clsAuf> tblAuf { get; set; }
+        public DbSet<clsGrf> tblGazReferans { get; set; }
 
 
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace jsonParser.Model
 {
-    [PrimaryKey(nameof(period))]
+    [PrimaryKey(nameof(period), nameof(BaslangicTarihi), nameof(BitisTarihi))]
     public class clsAuf
     {
         public DateTime period { get; set; }

@@ -13,6 +13,13 @@ namespace jsonParser.Functions
     public class restApi
     {
         public String Url = "https://api.epias.com.tr/epias/exchange/transparency";
+        enum period
+        {
+            DAILY,
+            WEEKLY,
+            MONTHLY,
+            PERIODIC
+        }
         public List<clsDagitimModel> getDagitimBolgesi()
         {
             var client = new RestClient(Url);
@@ -82,6 +89,22 @@ namespace jsonParser.Functions
             JObject jobj = JObject.Parse(response);
             var body = jobj["body"]["aufList"].ToString();
             var jsonModel = JsonConvert.DeserializeObject<List<clsAuf>>(body);
+            return jsonModel;
+        }
+        public List<clsGrf> getGrf(DateTime basTar, DateTime bitTar)
+        {    
+            
+            var client = new RestClient(Url);
+
+            var request = new RestRequest("/stp/grf", Method.Get);
+            request.AddParameter("startDate", basTar.ToString("yyyy-MM-dd"));
+            request.AddParameter("endDate", bitTar.ToString("yyyy-MM-dd"));
+            request.AddParameter("period", period.DAILY);
+
+            var response = client.Execute(request).Content;
+            JObject jobj = JObject.Parse(response);
+            var body = jobj["body"]["prices"].ToString();
+            var jsonModel = JsonConvert.DeserializeObject<List<clsGrf>>(body);
             return jsonModel;
         }
     }
